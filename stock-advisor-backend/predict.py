@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import requests
 
+
 app = Flask(__name__)
 CORS(app)  # ✅ Allow React frontend (localhost:3000) to access Flask API
 

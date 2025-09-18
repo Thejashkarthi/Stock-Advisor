@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-
+import "./App.css";
 Chart.register(...registerables);
 
 function StockSearch() {
@@ -112,26 +112,40 @@ function StockSearch() {
   };
 
   if (!stock) {
-    return (
-      <div className="initial-screen">
-        <div className="search-container">
+  return (
+    <div className="landing-screen">
+      <div className="landing-content">
+        <h1 className="app-title">Stock Advisor</h1>
+        <p className="app-subtitle">Stock analysis and screening tool for investors</p>
+
+        <div className="search-box">
           <input
             type="text"
-            placeholder="Enter stock symbol (e.g., AAPL)"
+            placeholder="Search for a company (e.g., AAPL)"
             value={symbol}
             onChange={(e) => setSymbol(e.target.value.toUpperCase())}
             className="search-input"
           />
           <button onClick={fetchStock} className="search-button">Search</button>
         </div>
+
+        <div className="suggestions">
+          <span onClick={() => setSymbol("AAPL")}>AAPL</span>
+          <span onClick={() => setSymbol("TSLA")}>TSLA</span>
+          <span onClick={() => setSymbol("MSFT")}>MSFT</span>
+          <span onClick={() => setSymbol("GOOGL")}>GOOGL</span>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
   return (
     <div className="app-container">
       <nav className="nav-bar">
         <ul>
+          <li className={!stock ? 'active' : ''} onClick={() => setStock(null)}>Home</li>
           <li className={tab === 'stock' ? 'active' : ''} onClick={() => setTab('stock')}>Stock</li>
           <li className={tab === 'analyze' ? 'active' : ''} onClick={() => setTab('analyze')}>Evaluate</li>
           <li className={tab === 'news' ? 'active' : ''} onClick={() => setTab('news')}>News</li>
